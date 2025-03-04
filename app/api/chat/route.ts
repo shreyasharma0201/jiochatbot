@@ -19,12 +19,15 @@ const client = new QdrantClient({
 // Initialize Hugging Face API
 const hf = new HfInference(HF_API_KEY);
 
-// Load the embedding model
+// Initialize the embedding model promise
+let embedderPromise = pipeline("feature-extraction", "Xenova/bge-large-en-v1.5");
 let embedder: any = null;
+
+// Function to get the embedder
 async function getEmbedder() {
     if (!embedder) {
         console.log("Loading embedding model...");
-        embedder = await pipeline("feature-extraction", "Xenova/bge-large-en-v1.5");
+        embedder = await embedderPromise; // Store the resolved model
     }
     return embedder;
 }
@@ -55,31 +58,30 @@ export async function POST(req: Request) {
 
         // Construct the prompt for Mistral-7B
         const systemPrompt = `
-    You are an AI assistant specializing in Jio Pay services and support.
+            You are an AI assistant specializing in Jio Pay services and support.
 
-    - If the user query is general, rely on your own understanding.
-    - If the query is related to Jio Pay, provide **accurate and concise information**.
-    - If you don't know the answer, say "I'm not sure" instead of making up information.
-    - **Always follow this strict output format:**
-      
-    Response: [Your answer here]
+            - If the user query is general, rely on your own understanding.
+            - If the query is related to Jio Pay, provide **accurate and concise information**.
+            - If you don't know the answer, say "I'm not sure" instead of making up information.
+            - **Always follow this strict output format:**
+            
+            Response: [Your answer here]
 
-    - Do not include any extra words, explanations, or greetings outside the required format.
+            - Do not include any extra words, explanations, or greetings outside the required format.
 
-    Context:
-    ${docContext}
+            Context:
+            ${docContext}
 
-    User's question: ${latestMessage}
-`;
+            User's question: ${latestMessage}
+        `;
 
-        // Stream response from Hugging Face API
         const responseStream = new ReadableStream({
             async start(controller) {
                 try {
                     for await (const chunk of hf.textGenerationStream({
                         model: "mistralai/Mistral-7B-Instruct-v0.2",
                         inputs: systemPrompt,
-                        parameters: { max_new_tokens: 256, stream: true }
+                        parameters: { max_new_tokens: 512, stream: true }
                     })) {
                         if (chunk.token.text) {
                             controller.enqueue(new TextEncoder().encode(chunk.token.text));
