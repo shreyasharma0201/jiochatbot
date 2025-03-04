@@ -1,9 +1,10 @@
 import "./global.css"
 
-export const metdata = {
-    title: "Jio Pay Chat Support",
-    description: "Chat bot to support deal with jio Pay."
-}
+export const metadata = {
+    title: "Your App Title",
+    description: "Your App Description",
+};
+  
 
 const RootLayout = ({children}) => {
     return (
