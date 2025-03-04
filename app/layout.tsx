@@ -1,8 +1,8 @@
 import "./global.css"
 
 export const metadata = {
-    title: "Your App Title",
-    description: "Your App Description",
+    title: "Jio Pay Support",
+    description: "A chat bot support for Jio Pay related queries",
 };
   
 

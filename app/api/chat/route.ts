@@ -79,7 +79,7 @@ export async function POST(req: Request) {
                     for await (const chunk of hf.textGenerationStream({
                         model: "mistralai/Mistral-7B-Instruct-v0.2",
                         inputs: systemPrompt,
-                        parameters: { max_new_tokens: 512, stream: true }
+                        parameters: { max_new_tokens: 256, stream: true }
                     })) {
                         if (chunk.token.text) {
                             controller.enqueue(new TextEncoder().encode(chunk.token.text));
