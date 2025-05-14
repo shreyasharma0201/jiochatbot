@@ -1,9 +1,21 @@
-#### RAG Chatbot for Jio Pay
+# RAG Chatbot for Jio Pay
 
-The goal of this project was to develop a chatbot using Retrieval-Augmented Generation (RAG) to enhance response accuracy and contextual understanding. Unlike traditional chatbots, RAG integrates retrieval-based and generative methods to fetch relevant information before generating responses, making it useful for customer support, knowledge management, and learning.
+A Retrieval-Augmented Generation (RAG) based chatbot designed to enhance response accuracy and contextual understanding for Jio Pay. This chatbot combines retrieval-based and generative methods to provide precise and context-aware responses, making it ideal for customer support, knowledge management, and learning.
 
-The chatbot was built through data collection, model training using dense retrievers and generative transformers, fine-tuning, and deployment via API for web and messaging platforms.
+## Features
 
-Key features include real-time information retrieval, scalability across industries.
+- **Retrieval-Augmented Generation (RAG):** Combines dense retrievers and generative transformers for accurate and context-aware responses.
+- **Real-time Information Retrieval:** Dynamically fetches relevant information before generating responses.
+- **Scalability:** Adaptable across various industries and use cases.
+- **API Deployment:** Easily integrable with web and messaging platforms.
 
-Demo Link [https://drive.google.com/file/d/1G3vktt26MgjHetJvtssZeCB3k593v8oN/view]
+## Demo
+
+Check out the demo video [here](https://drive.google.com/file/d/1G3vktt26MgjHetJvtssZeCB3k593v8oN/view).
+
+## Project Workflow
+
+1. **Data Collection:** Gather relevant datasets for training and fine-tuning.
+2. **Model Training:** Utilize dense retrievers and generative transformers.
+3. **Fine-tuning:** Optimize the model for Jio Pay-specific queries.
+4. **Deployment:** Serve the model via API for integration with web and messaging platforms.
